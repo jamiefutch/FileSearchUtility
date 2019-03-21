@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchFilesUtility", "SearchFilesUtility\SearchFilesUtility.csproj", "{9EEAD984-8F88-4CA4-AE17-8D049DE52887}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CleanBuild|Any CPU = CleanBuild|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.CleanBuild|Any CPU.ActiveCfg = CleanBuild|Any CPU
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.CleanBuild|Any CPU.Build.0 = CleanBuild|Any CPU
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EEAD984-8F88-4CA4-AE17-8D049DE52887}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
