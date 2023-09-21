@@ -12,119 +12,82 @@ namespace SearchFilesUtility.Controllers
     public static class SearchController
     {
         private static List<string> _fileList;
+        private static List<SearchResult> _searchResultList;
+        private static Form1 _form1;
+        private static List<string> _excludeList;
 
-        public static List<SearchResult> SearchFilesInDirectory(string DirectoryPath, string SearchString)
+        public static ResultsSet SearchFilesInDirectory(string DirectoryPath,
+            string SearchString,
+            Form1 form1)
         {
-
+            _excludeList =  BuildExcludeList();
+            int filesSearchedCount = 0;
+            _form1 = form1;
             _fileList = new List<string>();
+
+            _form1.setStatus("Building File List...");
             System.IO.DirectoryInfo di = new DirectoryInfo(DirectoryPath);
             WalkDirectoryTree(di);
-            List<SearchResult> srlist = new List<SearchResult>();
-            //foreach (string p in _fileList)
+
+            _form1.setStatus("Searching Files...");
+            StringBuilder s = new StringBuilder();
+            double cap = s.MaxCapacity;
+            bool SearchComplete = true;
             FileSearchController fsc = new FileSearchController();
+            
+            int fileCount = _fileList.Count;
             foreach (string p in _fileList)
-            {
-                //Int32 LineCount = 1;
+            {                   
                 try
                 {
-                    /**
-                    foreach (string line in File.ReadLines(p))
+                    if (!IsFileExcluded(p))
                     {
-                        Application.DoEvents();
-                        Int32 index = 0;
-                        index = line.IndexOf(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                        if (index >= 0)
+                        var tooLargeToScan = false;
+                        var found = false;
+                        FileInfo fi = new FileInfo(p);
+                        if(fi.Length > 200 && fi.Length < 10000)
                         {
-                            SearchResult sr = new SearchResult();
-                            sr.FileName = p;
-                            sr.LineNumber = LineCount;
-                            srlist.Add(sr);
+                            var f = File.ReadAllText(p);
+                            Application.DoEvents();
+                            var trie = new Trie();
+                            trie.Add(SearchString);
+                            trie.Build();
+                            found = trie.Find(f).Any();                            
                         }
-                        LineCount++;
+                        else
+                        { tooLargeToScan=true;}
+
+                        if (tooLargeToScan || found == true)
+                        {
+                            s.Append(fsc.SearchFile4(p, SearchStringToArray(SearchString)));
+                        }
+                        if ((double)s.Capacity / cap >= .4)
+                        { 
+                            SearchComplete = false;
+                            break;
+                        }
                     }
-                    **/
-                    /**
-                    using (FileSearchController fsc = new FileSearchController())
-                    {
-                        List<SearchResult> resultlist = fsc.SearchFile(p, SearchString);
-                        srlist.AddRange(resultlist);
-                    }
-                    **/
-                    
-                    //List<SearchResult> resultlist = fsc.SearchFile3(p, SearchString, ref srlist);
-                    fsc.SearchFile3(p, SearchString, ref srlist);
-                    //srlist.AddRange(resultlist);
                 }
                 catch (Exception ex)
                 {
                     string msg = ex.Message;
-#if DEBUG
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine(ex.StackTrace);
-#endif
+                }
+                filesSearchedCount++;
+                if (filesSearchedCount % 100 == 0)
+                {
+                    _form1.setFilesSearchedCount(filesSearchedCount, fileCount);
                 }
             };
-
-            /**
-            List<SearchResult> srlist = new List<SearchResult>();
-            try
+            _form1.setFilesSearchedCount(filesSearchedCount, fileCount);
+            ResultsSet rs = new ResultsSet
             {
-                FileInfo[] fi = new DirectoryInfo(DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
+                Complete = SearchComplete,
+                SearchResults = s.ToString()
+            };
 
-                foreach (FileInfo f in fi)
-                {
-                    Int32 LineCount = 1;
-                    foreach (string line in File.ReadLines(f.FullName))
-                    {
-                        Application.DoEvents();
-                        Int32 index = 0;
-                        index = line.IndexOf(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                        if (index >= 0)
-                        {
-                            SearchResult sr = new SearchResult();
-                            sr.FileName = f.FullName;
-                            sr.LineNumber = LineCount;
-                            srlist.Add(sr);
-                        }
-                        LineCount++;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-            }
-            **/
-
-            /**
-            Parallel.ForEach(fi, (f) =>
-            {
-                Int32 LineCount = 1;
-                foreach (string line in File.ReadLines(f.FullName))
-                {
-                    Application.DoEvents();
-                    Int32 index = 0;
-                    index = line.IndexOf(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                    if (index >= 0)
-                    {
-                        SearchResult sr = new SearchResult();
-                        sr.FileName = f.FullName;
-                        sr.LineNumber = LineCount;
-                        srlist.Add(sr);
-                    }
-                    LineCount++;
-                }                
-                //resultlist.Add(currentFile);
-            });
-            **/
-
-
-            
-                return srlist;
+            return rs;
         }
 
-        
 
         public static List<SearchResult> SearchFile(string FilePath, string SearchString)
         {
@@ -154,7 +117,12 @@ namespace SearchFilesUtility.Controllers
             }
             return srlist;
         }
-        
+
+        private static string[] SearchStringToArray(string searchString)
+        {
+
+            return new string[] { searchString };
+        }
 
         static void WalkDirectoryTree(System.IO.DirectoryInfo root)
         {
@@ -170,10 +138,7 @@ namespace SearchFilesUtility.Controllers
             // than the application provides.
             catch (UnauthorizedAccessException e)
             {
-                // This code just writes out the message and continues to recurse.
-                // You may decide to do something different here. For example, you
-                // can try to elevate your privileges and access the file again.
-                //log.Add(e.Message);
+                // do nothing, ignore the file    
             }
 
             catch (System.IO.DirectoryNotFoundException e)
@@ -194,14 +159,10 @@ namespace SearchFilesUtility.Controllers
             if (files != null)
             {
                 foreach (System.IO.FileInfo fi in files)
-                {
-                    // In this example, we only access the existing FileInfo object. If we
-                    // want to open, delete or modify the file, then
-                    // a try-catch block is required here to handle the case
-                    // where the file has been deleted since the call to TraverseTree().
-                    //Console.WriteLine(fi.FullName);
+                {                                                            
                     try
                     {
+                        Application.DoEvents();
                         _fileList.Add(fi.FullName);
                     }
                     catch (Exception ex)
@@ -223,10 +184,49 @@ namespace SearchFilesUtility.Controllers
                 }
             }
         }
-    }
 
-    public class SearchResult {
+        public static List<string> BuildExcludeList()
+        {
+            List<string> list = new List<string>();
+            list.Add(".git");
+            list.Add(".mdf");
+            list.Add(".exe");
+            list.Add(".dll");
+            list.Add(".zip");
+            list.Add(".rar");
+            list.Add(".bmp");
+            list.Add(".jpg");
+            list.Add(".jpeg");
+            list.Add(".dcm");
+            list.Add(".so");
+            list.Add(".pdb");
+            return list;
+        }
+
+        public static bool IsFileExcluded(string fileName)
+        {
+            bool retval = false;
+            foreach(string s in _excludeList)
+            {
+                if(fileName.Contains(s))
+                {
+                    retval = true;
+                    break;
+                }
+            }
+            return retval;
+        }
+
+    }        
+
+    public struct SearchResult {
         public string FileName { get; set; }
-        public Int32 LineNumber { get; set; } 
-    }    
+        public int LineNumber { get; set; } 
+    }
+    
+    public struct ResultsSet
+    {
+        public string SearchResults { get; set; }
+        public bool Complete { get; set; }
+    }
 }

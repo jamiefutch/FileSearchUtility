@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -76,24 +77,27 @@ namespace SearchFilesUtility.Controllers
             return srlist;
         }
 
-        public void SearchFile3(string FileName, string SearchString, ref List<SearchResult> SearchResults)
-        {
-            //List<SearchResult> srlist = new List<SearchResult>();
-            int LineCount = 0;
-
+        //public List<SearchResult> SearchFile3(string FileName, string SearchString)
+        public List<SearchResult> SearchFile3(string FileName, string[] SearchString)
+        {               
+            List<SearchResult> searchResults = new List<SearchResult>(100000);
+            int LineCount = 0;            
             try
-            {
+            {                
                 foreach (string line in File.ReadLines(FileName))
                 {
                     Application.DoEvents();
-                    Int32 index = 0;
-                    index = line.IndexOf(SearchString, StringComparison.CurrentCultureIgnoreCase);
-                    if (index >= 0)
+                    //bool found = line.Contains(SearchString, StringComparison.CurrentCultureIgnoreCase);                    
+                    var trie = new Trie();
+                    trie.Add(SearchString);
+                    trie.Build();
+                    var found = trie.Find(line).Any();
+                    if (found)
                     {
                         SearchResult sr = new SearchResult();
                         sr.FileName = FileName;
                         sr.LineNumber = LineCount;
-                        SearchResults.Add(sr);
+                        searchResults.Add(sr);
                     }
                     LineCount++;
                 }
@@ -102,8 +106,39 @@ namespace SearchFilesUtility.Controllers
             {
                 string msg = ex.Message;
             }
+            searchResults.TrimExcess();
+            return searchResults;
         }
 
+        public StringBuilder SearchFile4(string FileName, string[] SearchString)
+        {               
+            StringBuilder s = new StringBuilder();
+            int LineCount = 0;
+            try
+            {
+                foreach (string line in File.ReadLines(FileName))
+                {
+                    Application.DoEvents();                    
+                    var trie = new Trie();
+                    trie.Add(SearchString);
+                    trie.Build();
+                    var found = trie.Find(line).Any();
+                    if (found)
+                    {
+                        s.Append(LineCount);
+                        s.Append("\t");
+                        s.Append(FileName);
+                        s.Append("\r\n");
+                    }
+                    LineCount++;
+                }
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.Message;
+            }
+            return s;
+        }
 
 
         public void Dispose()

@@ -29,191 +29,246 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDirectoryName = new System.Windows.Forms.TextBox();
-            this.btnSelectDirectory = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtFileName = new System.Windows.Forms.TextBox();
-            this.btnSelectFile = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearchResults = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSearchString = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            txtDirectoryName = new System.Windows.Forms.TextBox();
+            btnSelectDirectory = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            txtFileName = new System.Windows.Forms.TextBox();
+            btnSelectFile = new System.Windows.Forms.Button();
+            btnSearch = new System.Windows.Forms.Button();
+            txtSearchResults = new System.Windows.Forms.TextBox();
+            label4 = new System.Windows.Forms.Label();
+            txtSearchString = new System.Windows.Forms.TextBox();
+            label5 = new System.Windows.Forms.Label();
+            lblStatus = new System.Windows.Forms.Label();
+            btnCopy = new System.Windows.Forms.Button();
+            label6 = new System.Windows.Forms.Label();
+            lblFilesSearched = new System.Windows.Forms.Label();
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 12);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Search Directory";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(11, 50);
+            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(93, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Search Directory";
             // 
             // txtDirectoryName
             // 
-            this.txtDirectoryName.Location = new System.Drawing.Point(99, 10);
-            this.txtDirectoryName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtDirectoryName.Name = "txtDirectoryName";
-            this.txtDirectoryName.Size = new System.Drawing.Size(813, 20);
-            this.txtDirectoryName.TabIndex = 1;
+            txtDirectoryName.Location = new System.Drawing.Point(116, 48);
+            txtDirectoryName.Margin = new System.Windows.Forms.Padding(2);
+            txtDirectoryName.Name = "txtDirectoryName";
+            txtDirectoryName.Size = new System.Drawing.Size(948, 23);
+            txtDirectoryName.TabIndex = 1;
             // 
             // btnSelectDirectory
             // 
-            this.btnSelectDirectory.Location = new System.Drawing.Point(916, 9);
-            this.btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSelectDirectory.Name = "btnSelectDirectory";
-            this.btnSelectDirectory.Size = new System.Drawing.Size(31, 19);
-            this.btnSelectDirectory.TabIndex = 2;
-            this.btnSelectDirectory.Text = "...";
-            this.btnSelectDirectory.UseVisualStyleBackColor = true;
-            this.btnSelectDirectory.Click += new System.EventHandler(this.btnSelectDirectory_Click);
+            btnSelectDirectory.Location = new System.Drawing.Point(1070, 46);
+            btnSelectDirectory.Margin = new System.Windows.Forms.Padding(2);
+            btnSelectDirectory.Name = "btnSelectDirectory";
+            btnSelectDirectory.Size = new System.Drawing.Size(36, 22);
+            btnSelectDirectory.TabIndex = 2;
+            btnSelectDirectory.Text = "...";
+            btnSelectDirectory.UseVisualStyleBackColor = true;
+            btnSelectDirectory.Click += btnSelectDirectory_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 40);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Or";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(11, 82);
+            label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(20, 15);
+            label2.TabIndex = 3;
+            label2.Text = "Or";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 66);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Search File";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(11, 112);
+            label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(63, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Search File";
             // 
             // txtFileName
             // 
-            this.txtFileName.Location = new System.Drawing.Point(99, 63);
-            this.txtFileName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtFileName.Name = "txtFileName";
-            this.txtFileName.Size = new System.Drawing.Size(813, 20);
-            this.txtFileName.TabIndex = 5;
+            txtFileName.Location = new System.Drawing.Point(116, 109);
+            txtFileName.Margin = new System.Windows.Forms.Padding(2);
+            txtFileName.Name = "txtFileName";
+            txtFileName.Size = new System.Drawing.Size(948, 23);
+            txtFileName.TabIndex = 5;
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.Location = new System.Drawing.Point(916, 63);
-            this.btnSelectFile.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSelectFile.Name = "btnSelectFile";
-            this.btnSelectFile.Size = new System.Drawing.Size(30, 19);
-            this.btnSelectFile.TabIndex = 6;
-            this.btnSelectFile.Text = "...";
-            this.btnSelectFile.UseVisualStyleBackColor = true;
-            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
+            btnSelectFile.Location = new System.Drawing.Point(1070, 109);
+            btnSelectFile.Margin = new System.Windows.Forms.Padding(2);
+            btnSelectFile.Name = "btnSelectFile";
+            btnSelectFile.Size = new System.Drawing.Size(35, 22);
+            btnSelectFile.TabIndex = 6;
+            btnSelectFile.Text = "...";
+            btnSelectFile.UseVisualStyleBackColor = true;
+            btnSelectFile.Click += btnSelectFile_Click;
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnSearch.Location = new System.Drawing.Point(872, 87);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 49);
-            this.btnSearch.TabIndex = 7;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            btnSearch.BackColor = System.Drawing.Color.PaleGreen;
+            btnSearch.Location = new System.Drawing.Point(1018, 136);
+            btnSearch.Margin = new System.Windows.Forms.Padding(2);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new System.Drawing.Size(88, 57);
+            btnSearch.TabIndex = 7;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearchResults
             // 
-            this.txtSearchResults.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearchResults.Location = new System.Drawing.Point(11, 141);
-            this.txtSearchResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtSearchResults.Multiline = true;
-            this.txtSearchResults.Name = "txtSearchResults";
-            this.txtSearchResults.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSearchResults.Size = new System.Drawing.Size(936, 454);
-            this.txtSearchResults.TabIndex = 8;
+            txtSearchResults.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            txtSearchResults.Location = new System.Drawing.Point(14, 199);
+            txtSearchResults.Margin = new System.Windows.Forms.Padding(2);
+            txtSearchResults.Multiline = true;
+            txtSearchResults.Name = "txtSearchResults";
+            txtSearchResults.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            txtSearchResults.Size = new System.Drawing.Size(1091, 523);
+            txtSearchResults.TabIndex = 8;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 105);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Search String";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(11, 157);
+            label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(76, 15);
+            label4.TabIndex = 9;
+            label4.Text = "Search String";
             // 
             // txtSearchString
             // 
-            this.txtSearchString.Location = new System.Drawing.Point(99, 101);
-            this.txtSearchString.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtSearchString.Name = "txtSearchString";
-            this.txtSearchString.Size = new System.Drawing.Size(745, 20);
-            this.txtSearchString.TabIndex = 10;
+            txtSearchString.Location = new System.Drawing.Point(116, 153);
+            txtSearchString.Margin = new System.Windows.Forms.Padding(2);
+            txtSearchString.Name = "txtSearchString";
+            txtSearchString.Size = new System.Drawing.Size(868, 23);
+            txtSearchString.TabIndex = 10;
+            txtSearchString.KeyDown += txtSearchString_KeyDown;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(9, 604);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Status:";
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label5.Location = new System.Drawing.Point(11, 733);
+            label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(47, 13);
+            label5.TabIndex = 11;
+            label5.Text = "Status:";
             // 
             // lblStatus
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(60, 604);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(47, 13);
-            this.lblStatus.TabIndex = 12;
-            this.lblStatus.Text = "lblStatus";
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new System.Drawing.Point(116, 733);
+            lblStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new System.Drawing.Size(52, 15);
+            lblStatus.TabIndex = 12;
+            lblStatus.Text = "lblStatus";
             // 
-            // button1
+            // btnCopy
             // 
-            this.button1.Location = new System.Drawing.Point(890, 600);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 20);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Copy";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            btnCopy.Location = new System.Drawing.Point(1039, 728);
+            btnCopy.Margin = new System.Windows.Forms.Padding(2);
+            btnCopy.Name = "btnCopy";
+            btnCopy.Size = new System.Drawing.Size(65, 23);
+            btnCopy.TabIndex = 13;
+            btnCopy.Text = "Copy";
+            btnCopy.UseVisualStyleBackColor = true;
+            btnCopy.Click += btnCopy_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label6.Location = new System.Drawing.Point(11, 756);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(89, 15);
+            label6.TabIndex = 14;
+            label6.Text = "Files Searched:";
+            // 
+            // lblFilesSearched
+            // 
+            lblFilesSearched.AutoSize = true;
+            lblFilesSearched.Location = new System.Drawing.Point(116, 756);
+            lblFilesSearched.Name = "lblFilesSearched";
+            lblFilesSearched.Size = new System.Drawing.Size(91, 15);
+            lblFilesSearched.TabIndex = 15;
+            lblFilesSearched.Text = "lblFilesSearched";
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Location = new System.Drawing.Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new System.Drawing.Size(1127, 24);
+            menuStrip1.TabIndex = 16;
+            menuStrip1.Text = "menuStrip1";            
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            fileToolStripMenuItem.Text = "&File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            exitToolStripMenuItem.Text = "E&xit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 630);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtSearchString);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtSearchResults);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.btnSelectFile);
-            this.Controls.Add(this.txtFileName);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnSelectDirectory);
-            this.Controls.Add(this.txtDirectoryName);
-            this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Search Files Utility";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1127, 795);
+            Controls.Add(lblFilesSearched);
+            Controls.Add(label6);
+            Controls.Add(btnCopy);
+            Controls.Add(lblStatus);
+            Controls.Add(label5);
+            Controls.Add(txtSearchString);
+            Controls.Add(label4);
+            Controls.Add(txtSearchResults);
+            Controls.Add(btnSearch);
+            Controls.Add(btnSelectFile);
+            Controls.Add(txtFileName);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(btnSelectDirectory);
+            Controls.Add(txtDirectoryName);
+            Controls.Add(label1);
+            Controls.Add(menuStrip1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
+            Margin = new System.Windows.Forms.Padding(2);
+            MaximizeBox = false;
+            MinimumSize = new System.Drawing.Size(1143, 834);
+            Name = "Form1";
+            Text = "Search Files Utility";
+            Load += Form1_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -231,7 +286,12 @@
         private System.Windows.Forms.TextBox txtSearchString;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblFilesSearched;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 
