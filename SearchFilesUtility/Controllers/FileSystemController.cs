@@ -12,10 +12,8 @@ namespace SearchFilesUtility.Controllers
     /// <summary>
     /// Controller for Searching files
     /// </summary>
-    class FileSearchController : IDisposable
-    {
-
-        
+    class FileSystemController : IDisposable
+    {        
         public List<SearchResult> SearchFile(string FileName, string SearchString)
         {
             List<SearchResult> srlist = new List<SearchResult>();
@@ -77,7 +75,6 @@ namespace SearchFilesUtility.Controllers
             return srlist;
         }
 
-        //public List<SearchResult> SearchFile3(string FileName, string SearchString)
         public List<SearchResult> SearchFile3(string FileName, string[] SearchString)
         {               
             List<SearchResult> searchResults = new List<SearchResult>(100000);

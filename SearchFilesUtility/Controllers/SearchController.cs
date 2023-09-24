@@ -33,7 +33,7 @@ namespace SearchFilesUtility.Controllers
             StringBuilder s = new StringBuilder();
             double cap = s.MaxCapacity;
             bool SearchComplete = true;
-            FileSearchController fsc = new FileSearchController();
+            FileSystemController fsc = new FileSystemController();
             
             int fileCount = _fileList.Count;
             foreach (string p in _fileList)
