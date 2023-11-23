@@ -89,11 +89,13 @@ namespace SearchFilesUtility.Controllers
         }
 
 
-        public static List<SearchResult> SearchFile(string FilePath, string SearchString)
+        public static string SearchFile(string FilePath, string SearchString)
         {
-            List<SearchResult> srlist = new List<SearchResult>();
+            StringBuilder sb = new StringBuilder();
+            //List<SearchResult> srlist = new List<SearchResult>();
             try
             {
+                sb.Append("Line Number\tSearch String\r\n");
                 Int32 LineCount = 1;
                 foreach (string line in File.ReadLines(FilePath))
                 {
@@ -103,9 +105,10 @@ namespace SearchFilesUtility.Controllers
                     if (index >= 0)
                     {
                         SearchResult sr = new SearchResult();
-                        sr.FileName = FilePath;
-                        sr.LineNumber = LineCount;
-                        srlist.Add(sr);
+                        //sr.FileName = FilePath;
+                        //sr.LineNumber = LineCount;
+                        //srlist.Add(sr);
+                        sb.Append($"{LineCount}\t{SearchString}\r\n");
                     }
                     LineCount++;
                 }
@@ -115,7 +118,7 @@ namespace SearchFilesUtility.Controllers
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
             }
-            return srlist;
+            return sb.ToString();
         }
 
         private static string[] SearchStringToArray(string searchString)
